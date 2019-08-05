@@ -11,8 +11,13 @@
 html,
 body {
     height: 100%;
+    width: 100%;
     margin: 0;
     padding: 0;
+    background-color: black;
+    background-image: url(images/anastasia-petrova-xu2WYJek5AI-unsplash.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
 .ui.menu {
@@ -22,12 +27,21 @@ body {
 
 }
 
+.map-view-area {
+    min-height: 200px;
+}
+
+.address-input {
+    max-width: 600px;
+}
+
 #container {
     position: relative;
-    top: 27rem;
+    top: 21rem;
     margin: 2rem;
     z-index: 1;
     overflow: scroll;
+    max-height: 25rem;
 }
 
 #card-display {
@@ -41,9 +55,9 @@ body {
     background-position: 50%;
 }
 
-.ui.segment {
+/* .ui.segment {
     z-index: 1;
-}
+} */
 
 #logo {
     width: 112px;

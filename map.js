@@ -7,6 +7,8 @@ $('.ui.dropdown')
 $('.ui.rating')
     .rating();
 
+// ****************************************
+// Global variables
 var userCity;
 var userLatitude;
 var userLongitude;
