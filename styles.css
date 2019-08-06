@@ -16,6 +16,10 @@ body {
     padding: 0;
 }
 
+.hidden {
+    display: none;
+}
+
 #main-container {
     height: 100%;
     width: 100%;
@@ -42,12 +46,22 @@ body {
     /* overflow: scroll; */
 }
 
+.search-results {
+    /* display: none; */
+}
+
 .hike-section {
     width: 100% !important;
-    background-color: rgb(105,105,105, 0.2);
     padding: 20px;
-    border-radius: 1%;
-    display: none;
+    margin-top: 10px;
+}
+
+.hike-img {
+    max-height: 160px;
+}
+
+.back-button {
+    /* visibility: hidden; */
 }
 
 .backgroundimg {

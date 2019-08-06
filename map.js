@@ -8,7 +8,7 @@ $('.ui.rating')
     .rating();
 
 $('.ui.accordion')
-.accordion();
+    .accordion();
 
 
 var userCity;
@@ -72,15 +72,40 @@ function convertDifficultyLevelsToColors(response){
     const difficultyAsText = response.trails[i].difficulty;
     switch (difficultyAsText){
         case 'green':
-            return
+            return 
     }
 }
 
 // Add Cards
 function createNewCard(response) {
-    // let newCard = $("<div class='red raised card slide-item item"+[i]+"' data-lat='" + response.trails[i].latitude + "' data-long='" + response.trails[i].longitude + "'><div class='blurring dimmable image'><div class='ui dimmer'><div class='content'><div class='center'><div class='ui inverted button'>Get Directions</div></div></div></div><div class='backgroundimg image' style='background-image: url(" + response.trails[i].imgMedium + ")'></div></div><div class='content'><h3>" + response.trails[i].name + "</h3><div class='meta'><span class='description'>" + response.trails[i].summary + "</span></div></div><div class='extra content'>Rating: <div class='ui star rating' data-rating='" + Math.round(response.trails[i].stars) + "'></div></div></div>");
+    let newCard = $("<div class='red raised card slide-item item"+[i]+"' data-lat='" + response.trails[i].latitude + "' data-long='" + response.trails[i].longitude + "'><div class='blurring dimmable image'><div class='ui dimmer'><div class='content'><div class='center'><div class='ui inverted button'>Get Directions</div></div></div></div><div class='backgroundimg image' style='background-image: url(" + response.trails[i].imgMedium + ")'></div></div><div class='content'><h3>" + response.trails[i].name + "</h3><div class='meta'><span class='description'>" + response.trails[i].summary + "</span></div></div><div class='extra content'>Rating: <div class='ui star rating' data-rating='" + Math.round(response.trails[i].stars) + "'></div></div></div>");
 
-    const newTrailElement = $(`<div class="title" data-lat=${response.trails[i].latitude} data-long=${response.trails[i].longitude}><i class="map marker alternate icon"></i>${response.trails[i].name}</div><div class="content"><p class="transition hidden">A dog is a type of domesticated animal. Known for its loyalty and faithfulness, it can be found as a welcome guest in many households across the world.</p></div>`)
+    const newTrailElement = $(`
+        <div class="title" data-lat=${response.trails[i].latitude} data-long=${response.trails[i].longitude}>
+            <i class="map marker alternate icon"></i>
+            <span style="font-weight: 400">Trail #${i+1} - </span>${response.trails[i].name}
+            </div>
+        <div class="content">
+            <div class="ui items">
+                <div class="item">
+                <div class="image">
+                    <img class="hike-img" src="${response.trails[i].imgMedium}">
+                </div>
+                <div class="content">
+                    <a class="header">${response.trails[i].name}</a>
+                    <div class="meta">
+                    <span>Description</span>
+                    </div>
+                    <div class="description">
+                    <p>${response.trails[i].summary}</p>
+                    </div>
+                    <div class="extra">
+                    Additional Details
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>`)
     
     $(".hike-section").append(newTrailElement);
     
@@ -91,16 +116,15 @@ function createNewCard(response) {
 // **************************************************
 // On page load
 $(document).on('load', function(){
-    $('.hike-section').hide();
+    $('.search-results').addClass(".hidden");
 })
 
 // **************************************************
 // On click of "Find a Hike Near Me: Search" button
 $("#find-hike-button").click(function () {
-    $(".segment").hide(1000);
-    $(".hike-section").show();
-    getTrails();
+    $(".search-results").removeClass(".hidden");
     $('#selection-box').hide();
+    getTrails();
 });
 
 // $(".select-buttons").click(function() {
