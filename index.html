@@ -17,6 +17,12 @@
 
 <body>
     <div id="main-container">
+
+<!-- ****************************** -->
+<!-- Where I left off 7/28/19 -->
+<!-- Making an input box to manually input address to locate user -->
+<!-- Using a placeholder image for the map, and then loading it in when it's needed -->
+<!-- *********************** -->
     <!-- Navbar -->
     <div class="ui container">
         <div class="ui menu">
@@ -37,8 +43,55 @@
     <div id='map'></div>
 
     <!-- Container -->
+
+
+    <!-- Input Container -->
+    <!-- <div class="ui container map-view-area">
+
+    </div> -->
     <div class="ui container" id="container">
         <!-- Initial Selection Box -->
+
+        
+        <div class="ui middle aligned center aligned grid address-input">
+            <div class="column">
+                <div class="ui message">
+                    Can't Auto-locate? Enter address here.
+                </div>    
+              <form class="ui large form">
+                <div class="ui stacked segment">
+                <div class="field">
+                    <div class="ui left icon input">
+                        <i class="user icon"></i>
+                        <input type="text" name="street-address" placeholder="Street address" style= "background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%; cursor: auto; max-width: 350px">
+
+                    </div>
+                </div>
+                <div class="fields"> 
+                    <div class="field">
+                        <div class="ui left icon input">
+                            <i class="lock icon"></i>
+                            <input type="text" name="city" placeholder="City" style= "background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%; cursor: auto;">
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="ui left icon input">
+                            <i class="lock icon"></i>
+                            
+                        </div>
+                    </div>
+                  </div>
+                    
+                  <div class="ui fluid large teal submit button">Search</div>
+                </div>
+          
+                <div class="ui error message"></div>
+          
+              </form>
+          
+              
+            </div>
+          </div>
         <div class="ui placeholder raised segment" id="selection-box">
             <div class="ui two column stackable center aligned grid">
                 <div class="ui vertical divider">Or</div>
@@ -82,6 +135,8 @@
             </div>
         </div>
 
+        
+
         <!-- Card Section -->
         <div class="ui styled accordion hike-section">
                 
@@ -95,6 +150,7 @@
     
     <!--Link jQuery-->
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js'></script>
+
 
     <!-- Link SemanticUI JS -->
     <script src='https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.js'></script>
@@ -151,6 +207,7 @@
         }
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBpCKTkks8wpK6Ptm4yHLGiKPGzJbQXfgo&callback=initMap"
+
         async defer>
     </script>
 

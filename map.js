@@ -8,9 +8,11 @@ $('.ui.rating')
     .rating();
 
 $('.ui.accordion')
-.accordion();
+  .accordion();
 
 
+// ****************************************
+// Global variables
 var userCity;
 
 var userLatitude;
