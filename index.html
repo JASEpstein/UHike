@@ -6,21 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>UHike - Find your trail</title>
-    <!--Link jQuery-->
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js'></script>
+  
     <!-- Link SemanticUI CSS -->
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.css' />
     <!-- Link Stylesheet -->
     <link rel="stylesheet" href="styles.css">
     <!--Link Firebase-->
     <!-- <script src="https://www.gstatic.com/firebasejs/5.8.6/firebase.js"></script> -->
-    <!--Link mapbox-->
-    <!-- <script src='https://api.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.js'></script> -->
-    <!-- <link href='https://api.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.css' rel='stylesheet' /> -->
-
 </head>
 
 <body>
+    <div id="main-container">
+
 <!-- ****************************** -->
 <!-- Where I left off 7/28/19 -->
 <!-- Making an input box to manually input address to locate user -->
@@ -42,6 +39,10 @@
         </div>
     </div>
 
+    <!-- Map Background -->
+    <div id='map'></div>
+
+    <!-- Container -->
 
 
     <!-- Input Container -->
@@ -137,20 +138,23 @@
         
 
         <!-- Card Section -->
-        <div class="ui special three cards" id="card-section">
+        <div class="ui styled accordion hike-section">
+                
         </div>
+        
+        <!-- <div class="ui special three cards" id="card-section">
+        </div> -->
     </div>
 
-    <!-- Map Background -->
-
-    <div id='map'>
-
-        
-    </div> 
+    </div>
+    
+    <!--Link jQuery-->
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js'></script>
 
 
     <!-- Link SemanticUI JS -->
     <script src='https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.js'></script>
+    
     <!-- Link to JS file -->
     <script src="map.js"></script>
     <!-- Script for Google Maps Load in -->
@@ -202,11 +206,12 @@
             infoWindow.open(map);
         }
     </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBpCKTkks8wpK6Ptm4yHLGiKPGzJbQXfgo"
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBpCKTkks8wpK6Ptm4yHLGiKPGzJbQXfgo&callback=initMap"
+
         async defer>
     </script>
 
 
-</body>
 
+</body>
 </html>
