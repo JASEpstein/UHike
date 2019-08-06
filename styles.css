@@ -12,8 +12,13 @@
 html,
 body {
     height: 100%;
+    width: 100%;
     margin: 0;
     padding: 0;
+    background-color: black;
+    background-image: url(images/anastasia-petrova-xu2WYJek5AI-unsplash.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
 .hidden {
@@ -34,6 +39,14 @@ body {
     top: 2%;
 }
 
+.map-view-area {
+    min-height: 200px;
+}
+
+.address-input {
+    max-width: 600px;
+}
+
 #container {
     position: absolute;
     top: 56%;
@@ -44,6 +57,8 @@ body {
     width: 70%;
 
     /* overflow: scroll; */
+
+
 }
 
 .search-results {
@@ -71,9 +86,9 @@ body {
     background-position: 50%;
 }
 
-.ui.segment {
+/* .ui.segment {
     z-index: 1;
-}
+} */
 
 #logo {
     width: 112px;
