@@ -24,26 +24,20 @@ var trailLongitude;
 function getTrails() {
     // getUserIPLocation();
     var hikingProjectAPIKey = "200549915-38be137df30d5780f9f0fb77ff254499";
-  
-    // getUserIPLocation();
-    // var userLatitude = userIPLatitude;
-    // var userLongitude = userIPLongitude;
 
-    var maxDistance = "50" // Max distance in miles, default = 30, max = 200
+    var maxDistance = "30" // Max distance in miles, default = 30, max = 200
+    //Proxy URL to jump over CORS Header error
     const proxyURL = "https://peaceful-island-88132.herokuapp.com/"
     var queryURL = "https://www.hikingproject.com/data/get-trails?lat=" + userLatitude + "&lon=" + userLongitude + "&maxDistance=" + maxDistance + "&key=" + hikingProjectAPIKey;
     $.ajax({
         url: proxyURL + queryURL,
         method: "GET"
     }).then(function (response) {
-        var numberOfTrails = 9;
+        var numberOfTrails = 6;
         for (i = 0; i < numberOfTrails; i++) {
             createNewCard(response);
         }
-        // SemanticUI Hover Action has to be called here to work
-        $('.special.cards .image').dimmer({
-            on: 'hover'
-        });
+        
         $('.ui.rating')
             .rating();
     });
@@ -57,14 +51,9 @@ function convertDifficultyLevelsToColors(response){
     }
 }
 
-// If user doesn't GeoLocate
-function loadManualInput() {
-    $('.address-input').removeClass('hidden');
-}
-
 // Add Hike Elements
 function createNewCard(response) {
-    let newCard = $("<div class='red raised card slide-item item"+[i]+"' data-lat='" + response.trails[i].latitude + "' data-long='" + response.trails[i].longitude + "'><div class='blurring dimmable image'><div class='ui dimmer'><div class='content'><div class='center'><div class='ui inverted button'>Get Directions</div></div></div></div><div class='backgroundimg image' style='background-image: url(" + response.trails[i].imgMedium + ")'></div></div><div class='content'><h3>" + response.trails[i].name + "</h3><div class='meta'><span class='description'>" + response.trails[i].summary + "</span></div></div><div class='extra content'>Rating: <div class='ui star rating' data-rating='" + Math.round(response.trails[i].stars) + "'></div></div></div>");
+    // let newCard = $("<div class='red raised card slide-item item"+[i]+"' data-lat='" + response.trails[i].latitude + "' data-long='" + response.trails[i].longitude + "'><div class='blurring dimmable image'><div class='ui dimmer'><div class='content'><div class='center'><div class='ui inverted button'>Get Directions</div></div></div></div><div class='backgroundimg image' style='background-image: url(" + response.trails[i].imgMedium + ")'></div></div><div class='content'><h3>" + response.trails[i].name + "</h3><div class='meta'><span class='description'>" + response.trails[i].summary + "</span></div></div><div class='extra content'>Rating: <div class='ui star rating' data-rating='" + Math.round(response.trails[i].stars) + "'></div></div></div>");
 
     const newTrailElement = $(`
         <div class="title" data-lat=${response.trails[i].latitude} data-long=${response.trails[i].longitude}>
@@ -98,17 +87,6 @@ function createNewCard(response) {
    
 
 }
-
-// **************************************************
-// On page load
-$(document).on('load', function(){
-})
-
-// **************************************************
-// Geolocate Button
-$('.geolocate-button').on('click', function(){
-
-})
 
 // **************************************************
 // On click of "Find a Hike Near Me: Search" button
