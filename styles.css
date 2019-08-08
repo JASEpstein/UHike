@@ -45,6 +45,11 @@ body {
 
 .address-input {
     max-width: 600px;
+    margin: 0 15%;
+}
+
+.criteria-button {
+    margin-top: 4px;
 }
 
 #container {

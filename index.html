@@ -31,8 +31,13 @@
             </div>
             <h1 class="header item">U-Hike</h1>
 
+            <div class="header item">
+                <div class="ui input">
+                    <input type="text" placeholder="Your Address...">
+                </div>
+            </div>
             <div class="right menu">
-                <button class="ui item icon button">
+                <button class="ui item icon button" id="geolocate-button">
                     <i class="crosshairs icon"></i>
                 </button>
             </div>
@@ -53,57 +58,19 @@
         <!-- Initial Selection Box -->
 
         
-        <div class="ui middle aligned center aligned grid address-input">
-            <div class="column">
-                <div class="ui message">
-                    Can't Auto-locate? Enter address here.
-                </div>    
-              <form class="ui large form">
-                <div class="ui stacked segment">
-                <div class="field">
-                    <div class="ui left icon input">
-                        <i class="user icon"></i>
-                        <input type="text" name="street-address" placeholder="Street address" style= "background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%; cursor: auto; max-width: 350px">
-
-                    </div>
-                </div>
-                <div class="fields"> 
-                    <div class="field">
-                        <div class="ui left icon input">
-                            <i class="lock icon"></i>
-                            <input type="text" name="city" placeholder="City" style= "background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%; cursor: auto;">
-                        </div>
-                    </div>
-                    <div class="field">
-                        <div class="ui left icon input">
-                            <i class="lock icon"></i>
-                            
-                        </div>
-                    </div>
-                  </div>
-                    
-                  <div class="ui fluid large teal submit button">Search</div>
-                </div>
-          
-                <div class="ui error message"></div>
-          
-              </form>
-          
-              
-            </div>
-          </div>
+        
         <div class="ui placeholder raised segment" id="selection-box">
             <div class="ui two column stackable center aligned grid">
-                <div class="ui vertical divider">Or</div>
+                <div class="ui vertical divider">Then</div>
                 <div class="middle aligned row">
                     <div class="column">
                         <div class="ui icon header">
                             <i class="search icon"></i>
-                            Browse Hikes by...
+                            Select Your Criteria
                         </div>
-                        <div class="field">
-                            <div class="ui blue labeled icon top right pointing dropdown button">
-                                <i class="angle double up icon"></i>
+                        <div class="field criteria-button">
+                            <div class="ui yellow labeled icon top right pointing dropdown button">
+                                <i class="industry icon"></i>
                                 <span class="text">Difficulty</span>
                                 <div class="menu">
                                     <div class="item">
@@ -121,13 +88,33 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="field criteria-button">
+                                <div class="ui violet labeled icon top right pointing dropdown button">
+                                    <i class="compass icon"></i>
+                                    <span class="text">Length</span>
+                                    <div class="menu">
+                                        <div class="item">
+                                            <div class="ui green empty circular label"></div>
+                                            < 1 mile
+                                        </div>
+                                        <div class="item">
+                                            <div class="ui yellow empty circular label"></div>
+                                            1 - 5 miles
+                                        </div>
+                                        <div class="item">
+                                            <div class="ui red empty circular label"></div>
+                                            > 5 miles
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                     </div>
                     <div class="column">
                         <div class="ui icon header">
                             <i class="map icon"></i>
-                            Find a Hike Near Me
+                            Find a Hike Near Me!
                         </div>
-                        <div class="ui primary button" id="find-hike-button">
+                        <div class="ui green button" id="find-hike-button">
                             Search
                         </div>
                     </div>
@@ -136,7 +123,7 @@
         </div>
 
         <!-- Results Section -->
-        <div class="search-results">
+        <div class="search-results hidden">
             <button class="circular ui icon button back-button">
                 <i class="icon left chevron"></i>
             </button> 
@@ -161,59 +148,13 @@
     <script src='https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.js'></script>
     
     <!-- Link to JS file -->
-    <script src="map.js"></script>
+    <script src="app.js"></script>
     <!-- Script for Google Maps Load in -->
-    <script>
-        var map, infoWindow;
-
-        function initMap() {
-            map = new google.maps.Map(document.getElementById('map'), {
-                center: {
-                    lat: 36.144700,
-                    lng: -86.804050
-                },
-                zoom: 14,
-                disableDefaultUI: true
-
-            });
-            infoWindow = new google.maps.InfoWindow;
-
-            // Try HTML5 geolocation.
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(function (position) {
-                    var pos = {
-                        lat: position.coords.latitude,
-                        lng: position.coords.longitude
-                    };
-
-
-                    map.setCenter(pos);
-                    var marker = new google.maps.Marker({
-                        position: pos,
-                        map: map,
-                        title: 'You are here'
-                    });
-
-                }, function () {
-                    handleLocationError(true, infoWindow, map.getCenter());
-                });
-            } else {
-                // Browser doesn't support Geolocation
-                handleLocationError(false, infoWindow, map.getCenter());
-            }
-        }
-
-        function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-            infoWindow.setPosition(pos);
-            infoWindow.setContent(browserHasGeolocation ?
-                'Error: The Geolocation service failed.' :
-                'Error: Your browser doesn\'t support geolocation.');
-            infoWindow.open(map);
-        }
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBpCKTkks8wpK6Ptm4yHLGiKPGzJbQXfgo&callback=initMap"
+        async defer>
     </script>
-    <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBpCKTkks8wpK6Ptm4yHLGiKPGzJbQXfgo&callback=initMap"
-        async defer> -->
-    </script>
+    <script src="map.js"></script>
+
 
 
 

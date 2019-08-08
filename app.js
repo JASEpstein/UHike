@@ -14,9 +14,10 @@ $('.ui.accordion')
 // ****************************************
 // Global variables
 var userCity;
-
+const geoLocated = false;
 var userLatitude;
 var userLongitude;
+var userPos = {lat: userLatitude, lng: userLongitude}
 var trailLatitude;
 var trailLongitude;
 
@@ -29,9 +30,10 @@ function getTrails() {
     // var userLongitude = userIPLongitude;
 
     var maxDistance = "50" // Max distance in miles, default = 30, max = 200
+    const proxyURL = "https://peaceful-island-88132.herokuapp.com/"
     var queryURL = "https://www.hikingproject.com/data/get-trails?lat=" + userLatitude + "&lon=" + userLongitude + "&maxDistance=" + maxDistance + "&key=" + hikingProjectAPIKey;
     $.ajax({
-        url: queryURL,
+        url: proxyURL + queryURL,
         method: "GET"
     }).then(function (response) {
         var numberOfTrails = 9;
@@ -55,7 +57,12 @@ function convertDifficultyLevelsToColors(response){
     }
 }
 
-// Add Cards
+// If user doesn't GeoLocate
+function loadManualInput() {
+    $('.address-input').removeClass('hidden');
+}
+
+// Add Hike Elements
 function createNewCard(response) {
     let newCard = $("<div class='red raised card slide-item item"+[i]+"' data-lat='" + response.trails[i].latitude + "' data-long='" + response.trails[i].longitude + "'><div class='blurring dimmable image'><div class='ui dimmer'><div class='content'><div class='center'><div class='ui inverted button'>Get Directions</div></div></div></div><div class='backgroundimg image' style='background-image: url(" + response.trails[i].imgMedium + ")'></div></div><div class='content'><h3>" + response.trails[i].name + "</h3><div class='meta'><span class='description'>" + response.trails[i].summary + "</span></div></div><div class='extra content'>Rating: <div class='ui star rating' data-rating='" + Math.round(response.trails[i].stars) + "'></div></div></div>");
 
@@ -95,20 +102,22 @@ function createNewCard(response) {
 // **************************************************
 // On page load
 $(document).on('load', function(){
-    $('.search-results').addClass(".hidden");
 })
 
+// **************************************************
+// Geolocate Button
+$('.geolocate-button').on('click', function(){
+
+})
 
 // **************************************************
 // On click of "Find a Hike Near Me: Search" button
 $("#find-hike-button").click(function () {
-    $(".search-results").removeClass(".hidden");
-    $(".segment").hide(1000);
+    $(".search-results").removeClass("hidden");
     $(".hike-section").show();
 
     getTrails();
     $('#selection-box').hide();
-    getTrails();
 });
 
 // **************************************************
@@ -125,8 +134,9 @@ $(document).on('click', '.button.trail-button', function () {
 function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
         center: {
-            lat: 36.144700,
-            lng: -86.804050
+            //Clingman's Dome
+            lat: 35.5628,
+            lng: -83.4985
         },
         zoom: 14,
         disableDefaultUI: true
@@ -154,6 +164,11 @@ function initMap() {
         // Browser doesn't support Geolocation
         handleLocationError(false, infoWindow, map.getCenter());
     }
+
+    //Geolocate Button Event Listener
+    google.maps.event.addDomListener(document.getElementById('geolocate-button'), 'click', function(){
+        map.panTo({lat: userLatitude, lng: userLongitude});
+    })
 }
 
 // **************************************************
@@ -162,13 +177,8 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
     infoWindow.setPosition(pos);
     infoWindow.setContent(browserHasGeolocation ?
         'Error: The Geolocation service failed.' :
-        'Error: Your browser doesn\'t support geolocation.');
+        () => {'Error: Your browser doesn\'t support geolocation.', loadManualInput()});
     infoWindow.open(map);
 }
 
-// **************************************************
-// Functions called in HTML as google callback
-function initialize() {
-    initMap();
-    // whatever();
-}
+
