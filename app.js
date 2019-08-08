@@ -17,7 +17,6 @@ var userCity;
 const geoLocated = false;
 var userLatitude;
 var userLongitude;
-var userPos = {lat: userLatitude, lng: userLongitude}
 var trailLatitude;
 var trailLongitude;
 var trailsFunctionAlreadyRun = false;
@@ -42,6 +41,7 @@ function getTrails() {
         $('.ui.rating')
             .rating();
     });
+    trailsFunctionAlreadyRun = true;
 }
 
 function convertDifficultyLevelsToColors(response){
