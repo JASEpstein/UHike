@@ -20,6 +20,7 @@ var userLongitude;
 var userPos = {lat: userLatitude, lng: userLongitude}
 var trailLatitude;
 var trailLongitude;
+var trailsFunctionAlreadyRun = false;
 
 function getTrails() {
     // getUserIPLocation();
@@ -93,18 +94,24 @@ function createNewCard(response) {
 $("#find-hike-button").click(function () {
     $(".search-results").removeClass("hidden");
     $(".hike-section").show();
-
-    getTrails();
     $('#selection-box').hide();
+    (trailsFunctionAlreadyRun ? null : getTrails());
 });
 
 // **************************************************
 // On click of "Get Directions" button
-$(document).on('click', '.button.trail-button', function () {
+$(document).on('click', '.button.trail-button', function() {
     trailLatitude = $(this).data('lat');
     trailLongitude = $(this).data('lng');
     var directionsURL = "https://www.google.com/maps/dir/"+userLatitude+","+userLongitude+"/"+trailLatitude+",+"+trailLongitude;
     window.open(directionsURL,"_blank");
+});
+
+// **************************************************
+// On click of Back button
+$(document).on('click', '.back-button', function() {
+    $('.search-results').addClass('hidden');
+    $('#selection-box').show();
 });
 
 // **************************************************
