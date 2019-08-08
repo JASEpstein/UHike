@@ -139,7 +139,8 @@ function initMap() {
             lng: -83.4985
         },
         zoom: 14,
-        disableDefaultUI: true
+        disableDefaultUI: true,
+        gestureHandling: 'cooperative',
     });
     infoWindow = new google.maps.InfoWindow;
     // Try HTML5 geolocation.
