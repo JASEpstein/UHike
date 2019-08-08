@@ -1,5 +1,7 @@
-# groupProject1
-  *Group Project 1
+# U-Hike
+  *Perfected from a group project
+
+# [Deployed Link](https://jasepstein.github.io/UHike/)
 
 
 # Contributors
